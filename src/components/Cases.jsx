@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import TiltCard from './TiltCard';
 
 const allProjects = [
   {
@@ -194,9 +195,9 @@ export default function Cases() {
                 >
                   <div className="flex-1 w-full relative group">
                     <div className="absolute -inset-4 bg-accent/5 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-white/5 bg-white/[0.02]">
+                    <TiltCard className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-white/5 bg-white/2 hover:shadow-[0_20px_60px_-20px_rgba(0,250,255,0.15)]">
                       <img src={p.image} alt={p.title} className="w-full h-auto aspect-video object-cover grayscale-[50%] group-hover:grayscale-0 transition-all duration-700" />
-                    </div>
+                    </TiltCard>
                   </div>
 
                   <div className="flex-1 space-y-4 sm:space-y-6">

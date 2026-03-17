@@ -1,10 +1,54 @@
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Mail } from 'lucide-react';
 
 export default function Contacts() {
+  const sectionRef = useRef(null);
+  const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    function onScroll() {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const center = rect.top + rect.height / 2;
+      const vh = window.innerHeight;
+      setOffset(center - vh / 2);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
-    <section id="contacts" className="pt-16 sm:pt-20 md:pt-24 pb-8 sm:pb-12 px-5 sm:px-6 md:px-12 lg:px-24 bg-dark relative overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+    <section id="contacts" ref={sectionRef} className="pt-16 sm:pt-20 md:pt-24 pb-8 sm:pb-12 px-5 sm:px-6 md:px-12 lg:px-24 bg-dark relative overflow-hidden">
+
+      {/* Parallax orbs */}
+      <div
+        className="absolute w-[300px] h-[300px] rounded-full pointer-events-none -left-20 top-10 opacity-60"
+        style={{
+          background: 'radial-gradient(circle, rgba(0,250,255,0.07), transparent 70%)',
+          filter: 'blur(40px)',
+          transform: `translateY(${offset * 0.15}px)`,
+        }}
+      />
+      <div
+        className="absolute w-[200px] h-[200px] rounded-full pointer-events-none -right-10 bottom-20 opacity-60"
+        style={{
+          background: 'radial-gradient(circle, rgba(0,112,255,0.08), transparent 70%)',
+          filter: 'blur(30px)',
+          transform: `translateY(${offset * -0.1}px)`,
+        }}
+      />
+      <div
+        className="absolute w-[120px] h-[120px] rounded-full pointer-events-none right-[15%] top-[30%] opacity-60"
+        style={{
+          background: 'radial-gradient(circle, rgba(0,250,255,0.1), transparent 70%)',
+          filter: 'blur(20px)',
+          transform: `translateY(${offset * 0.2}px)`,
+        }}
+      />
+
+      <div className="max-w-7xl mx-auto relative z-10">
 
         {/* Основной контент */}
         <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 mb-16 sm:mb-24 md:mb-32">
@@ -36,7 +80,7 @@ export default function Contacts() {
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="group flex items-center gap-4 sm:gap-6 p-4 sm:p-6 bg-white/[0.02] border border-white/5 rounded-2xl hover:border-accent/40 transition-all duration-300"
+                className="group flex items-center gap-4 sm:gap-6 p-4 sm:p-6 bg-white/2 border border-white/5 rounded-2xl hover:border-accent/40 transition-all duration-300"
               >
                 <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-all duration-500 shrink-0">
                   <Send className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -54,7 +98,7 @@ export default function Contacts() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="group flex items-center gap-4 sm:gap-6 p-4 sm:p-6 bg-white/[0.02] border border-white/5 rounded-2xl hover:border-accent/40 transition-all duration-300"
+                className="group flex items-center gap-4 sm:gap-6 p-4 sm:p-6 bg-white/2 border border-white/5 rounded-2xl hover:border-accent/40 transition-all duration-300"
               >
                 <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-all duration-500 shrink-0">
                   <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -72,7 +116,7 @@ export default function Contacts() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="bg-white/[0.02] border border-white/5 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 relative overflow-hidden"
+            className="bg-white/2 border border-white/5 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 blur-3xl -z-10" />
 

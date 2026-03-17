@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Infinity, Rocket, MessageSquare, ShieldCheck } from 'lucide-react';
+import useCountUp from '../hooks/useCountUp';
 
 const features = [
   {
@@ -24,11 +25,17 @@ const features = [
   },
 ];
 
-const stats = [
-  { value: '15+', label: 'ПРОЕКТОВ' },
-  { value: '2', label: 'ГОДА ОПЫТА' },
-  { value: '∞', label: 'ЭНТУЗИАЗМА' },
-];
+function AnimatedStat({ value, suffix, label }) {
+  const counter = useCountUp(value, 1500);
+  return (
+    <div ref={counter.ref}>
+      <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-1 sm:mb-2">
+        {value === 0 ? suffix : counter.value + suffix}
+      </div>
+      <div className="text-[9px] sm:text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-accent/70 font-bold">{label}</div>
+    </div>
+  );
+}
 
 export default function About() {
   return (
@@ -79,12 +86,9 @@ export default function About() {
             transition={{ delay: 0.4 }}
             className="flex gap-8 sm:gap-10 md:gap-12"
           >
-            {stats.map((stat, index) => (
-              <div key={index}>
-                <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-1 sm:mb-2">{stat.value}</div>
-                <div className="text-[9px] sm:text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-accent/70 font-bold">{stat.label}</div>
-              </div>
-            ))}
+            <AnimatedStat value={15} suffix="+" label="ПРОЕКТОВ" />
+            <AnimatedStat value={2} suffix="" label="ГОДА ОПЫТА" />
+            <AnimatedStat value={0} suffix="∞" label="ЭНТУЗИАЗМА" />
           </motion.div>
         </div>
 

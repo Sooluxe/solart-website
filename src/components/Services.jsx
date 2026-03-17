@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Layout, MessageSquare, Smartphone, BarChart3, Terminal, Sparkles } from 'lucide-react';
+import SpotlightCard from './SpotlightCard';
 
 const services = [
   {
@@ -60,7 +61,7 @@ export default function Services() {
               viewport={{ once: true }}
               className="flex items-center gap-4 mb-4 sm:mb-6"
             >
-              <div className="h-[2px] w-10 sm:w-12 bg-accent/50"></div>
+              <div className="h-0.5 w-10 sm:w-12 bg-accent/50"></div>
               <span className="text-accent font-mono uppercase tracking-[0.2em] text-xs sm:text-sm">02. УСЛУГИ</span>
             </motion.div>
             <motion.h2
@@ -102,36 +103,34 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              whileHover={{
-                y: -8,
-                scale: 1.02,
-                backgroundColor: 'rgba(0, 250, 255, 0.03)'
-              }}
-              className="group relative bg-white/[0.02] border border-white/5 rounded-2xl p-6 sm:p-8 flex flex-col transition-all duration-300
-                         hover:border-accent/40 hover:shadow-[0_0_50px_-15px_rgba(0,250,255,0.3)]"
             >
-              {/* Иконка */}
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-accent/10 border border-accent/20 rounded-xl flex items-center justify-center mb-6 sm:mb-8 group-hover:bg-accent/20 transition-colors">
-                <s.icon className="w-5 h-5 sm:w-6 sm:h-6 text-accent group-hover:drop-shadow-[0_0_8px_rgba(0,250,255,0.8)]" />
-              </div>
+              <SpotlightCard
+                className="group bg-white/[0.02] border border-white/5 rounded-2xl p-6 sm:p-8 flex flex-col h-full transition-all duration-300
+                           hover:border-accent/40 hover:shadow-[0_0_50px_-15px_rgba(0,250,255,0.3)]"
+              >
+                {/* Иконка */}
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-accent/10 border border-accent/20 rounded-xl flex items-center justify-center mb-6 sm:mb-8 group-hover:bg-accent/20 transition-colors relative z-10">
+                  <s.icon className="w-5 h-5 sm:w-6 sm:h-6 text-accent group-hover:drop-shadow-[0_0_8px_rgba(0,250,255,0.8)]" />
+                </div>
 
-              {/* Текстовый контент */}
-              <h3 className="text-xl sm:text-2xl font-black text-white mb-2 uppercase tracking-tight">{s.title}</h3>
-              <p className="text-[9px] sm:text-[10px] font-mono tracking-[0.15em] sm:tracking-[0.2em] text-accent/60 mb-4 sm:mb-6 uppercase font-bold">{s.subtitle}</p>
+                {/* Текстовый контент */}
+                <h3 className="text-xl sm:text-2xl font-black text-white mb-2 uppercase tracking-tight relative z-10">{s.title}</h3>
+                <p className="text-[9px] sm:text-[10px] font-mono tracking-[0.15em] sm:tracking-[0.2em] text-accent/60 mb-4 sm:mb-6 uppercase font-bold relative z-10">{s.subtitle}</p>
 
-              <p className="text-gray-400 text-sm leading-relaxed mb-6 sm:mb-8 flex-grow group-hover:text-gray-200 transition-colors">
-                {s.desc}
-              </p>
+                <p className="text-gray-400 text-sm leading-relaxed mb-6 sm:mb-8 flex-grow group-hover:text-gray-200 transition-colors relative z-10">
+                  {s.desc}
+                </p>
 
-              {/* Список фич */}
-              <ul className="space-y-2.5 sm:space-y-3">
-                {s.features.map((f, idx) => (
-                  <li key={idx} className="flex items-center gap-2.5 sm:gap-3 text-[11px] text-gray-300 font-medium uppercase tracking-wide group-hover:text-white transition-colors">
-                    <div className="w-1.5 h-1.5 bg-accent rounded-full shadow-[0_0_5px_#00FAFF] shrink-0" />
-                    {f}
-                  </li>
-                ))}
-              </ul>
+                {/* Список фич */}
+                <ul className="space-y-2.5 sm:space-y-3 relative z-10">
+                  {s.features.map((f, idx) => (
+                    <li key={idx} className="flex items-center gap-2.5 sm:gap-3 text-[11px] text-gray-300 font-medium uppercase tracking-wide group-hover:text-white transition-colors">
+                      <div className="w-1.5 h-1.5 bg-accent rounded-full shadow-[0_0_5px_#00FAFF] shrink-0" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+              </SpotlightCard>
             </motion.div>
           ))}
         </div>

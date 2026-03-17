@@ -48,48 +48,51 @@ export default function Faq() {
 
         {/* Список вопросов */}
         <div className="space-y-3 sm:space-y-4">
-          {faqs.map((faq, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="group"
-            >
-              <button
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className={`w-full text-left p-4 sm:p-6 border transition-all duration-300 flex justify-between items-center gap-3 sm:gap-4
-                  ${openIndex === index
-                    ? 'bg-accent/5 border-accent/40 shadow-[0_0_20px_rgba(0,250,255,0.1)] rounded-t-2xl rounded-b-none border-b-0'
-                    : 'bg-white/[0.02] border-white/5 hover:border-white/20 hover:bg-white/[0.04] rounded-2xl'}`}
+          {faqs.map((faq, index) => {
+            const isOpen = openIndex === index;
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="group"
               >
-                <span className={`font-bold text-sm sm:text-base uppercase tracking-wide transition-colors
-                  ${openIndex === index ? 'text-white' : 'text-gray-300 group-hover:text-white'}`}>
-                  {faq.question}
-                </span>
-                <ChevronDown className={`w-4 h-4 sm:w-5 sm:h-5 text-accent shrink-0 transition-transform duration-500
-                  ${openIndex === index ? 'rotate-180' : 'rotate-0'}`}
-                />
-              </button>
+                <button
+                  onClick={() => setOpenIndex(isOpen ? null : index)}
+                  className={`w-full text-left p-4 sm:p-6 border transition-all duration-300 flex justify-between items-center gap-3 sm:gap-4
+                    ${isOpen
+                      ? 'bg-accent/5 border-accent/40 rounded-t-2xl rounded-b-none border-b-0 shadow-[0_0_30px_-10px_rgba(0,250,255,0.2),inset_0_0_30px_-15px_rgba(0,250,255,0.05)]'
+                      : 'bg-white/2 border-white/5 hover:border-white/20 hover:bg-white/[0.04] rounded-2xl'}`}
+                >
+                  <span className={`font-bold text-sm sm:text-base uppercase tracking-wide transition-colors
+                    ${isOpen ? 'text-white' : 'text-gray-300 group-hover:text-white'}`}>
+                    {faq.question}
+                  </span>
+                  <ChevronDown className={`w-4 h-4 sm:w-5 sm:h-5 text-accent shrink-0 transition-transform duration-500
+                    ${isOpen ? 'rotate-180' : 'rotate-0'}`}
+                  />
+                </button>
 
-              <AnimatePresence>
-                {openIndex === index && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: 'easeInOut' }}
-                    className="overflow-hidden"
-                  >
-                    <div className="p-4 sm:p-6 text-gray-400 text-sm sm:text-base leading-relaxed border-x border-b border-accent/40 rounded-b-2xl bg-accent/[0.02]">
-                      {faq.answer}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      className="overflow-hidden"
+                    >
+                      <div className="p-4 sm:p-6 text-gray-400 text-sm sm:text-base leading-relaxed border-x border-b border-accent/40 rounded-b-2xl bg-accent/[0.02] shadow-[0_10px_30px_-10px_rgba(0,250,255,0.1)]">
+                        {faq.answer}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -31,7 +31,7 @@ export default function Stack() {
           </h2>
         </motion.div>
 
-        {/* Облако тегов */}
+        {/* Облако тегов с float-анимацией */}
         <div className="flex flex-wrap justify-center gap-2.5 sm:gap-4">
           {techStack.map((tech, index) => (
             <motion.div
@@ -40,12 +40,24 @@ export default function Stack() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05 }}
+              animate={{ y: [0, -6, 0] }}
               whileHover={{
                 scale: 1.05,
                 borderColor: 'rgba(0, 250, 255, 0.5)',
-                backgroundColor: 'rgba(0, 250, 255, 0.05)'
+                backgroundColor: 'rgba(0, 250, 255, 0.05)',
               }}
-              className="px-4 sm:px-6 py-2.5 sm:py-3 bg-white/[0.02] border border-white/10 rounded-lg cursor-default transition-all duration-300
+              // Each tag floats with different phase via custom duration & delay
+              // eslint-disable-next-line react/jsx-no-duplicate-props
+              transition={{
+                delay: index * 0.05,
+                y: {
+                  duration: 3 + (index % 4) * 0.5,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                  delay: index * 0.3,
+                },
+              }}
+              className="px-4 sm:px-6 py-2.5 sm:py-3 bg-white/2 border border-white/10 rounded-lg cursor-default transition-shadow duration-300
                          group hover:shadow-[0_0_20px_rgba(0,250,255,0.2)]"
             >
               <span className="text-xs sm:text-sm md:text-base font-mono text-gray-400 group-hover:text-white transition-colors">
