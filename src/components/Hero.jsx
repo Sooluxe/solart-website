@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Globe, Bot, Grid3x3, BarChart4, Monitor } from 'lucide-react';
+import ParticlesBackground from './ParticlesBackground';
 
 const tags = [
   { icon: Globe, label: 'Tilda' },
@@ -13,6 +14,9 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 sm:px-6 overflow-hidden pt-28 sm:pt-32 md:pt-36 pb-12
                         bg-[url('/bg1.jpg')] bg-cover bg-center bg-no-repeat">
+
+      {/* Animated particles background */}
+      <ParticlesBackground />
 
       {/* Верхний бадж */}
       <motion.div
