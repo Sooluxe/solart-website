@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  --color-dark: #05050A;
+  --color-accent: #00FAFF;
+  --color-deep-blue: #0070FF;
+
+  --background-image-cyber: linear-gradient(90deg, #00FAFF 0%, #0070FF 100%);
+  --font-sans: "Inter", "system-ui", sans-serif;
+}
+
+:root {
+  background-color: var(--color-dark);
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-dark);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Скрытие скроллбара для фильтров кейсов */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Увеличение тач-зон на мобильных */
+@media (pointer: coarse) {
+  a, button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Убираем дефолтный outline у кнопок при клике */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Плавный скролл к якорям с учётом фиксированного хедера */
+[id] {
+  scroll-margin-top: 80px;
+}
